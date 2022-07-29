@@ -1,0 +1,149 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+      <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+      <link rel="icon" href="data:;base64,=">
+
+    <title>{{title}}</title>
+  </head>
+<!--Шапка сайта-->
+  <header style="color:grey;">
+    <div class="container">
+  <header class="blog-header lh-1 py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1">
+        <a class="link-secondary" href="#">Subscribe</a>
+      </div>
+      <div class="col-4 text-center">
+        <h1><a class="blog-header-logo text-dark" href="/" style="font-weight: bold;">Large O</a></h1>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center">
+        <a class="link-secondary" href="#" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
+        </a>
+        <a class="btn btn-sm btn-outline-secondary" href="{% url 'login' %}">Sign in</a>
+      </div>
+    </div>
+  </header>
+<!--Конец шапки-->
+
+  <div class="nav-scroller py-1 mb-2" style="text-color:red;">
+    <nav class="nav d-flex justify-content-between">
+      {% for post in posts %}
+      <a class="p-2 link-secondary" href="#">{{post.tag}}</a>{% endfor %}
+      <a class="p-2 link-secondary" href="#">World</a>
+      <a class="p-2 link-secondary" href="#">U.S.</a>
+      <a class="p-2 link-secondary" href="#">Technology</a>
+      <a class="p-2 link-secondary" href="#">Design</a>
+      <a class="p-2 link-secondary" href="#">Culture</a>
+      <a class="p-2 link-secondary" href="#">Business</a>
+      <a class="p-2 link-secondary" href="#">Politics</a>
+      <a class="p-2 link-secondary" href="#">Opinion</a>
+      <a class="p-2 link-secondary" href="#">Science</a>
+      <a class="p-2 link-secondary" href="#">Health</a>
+      <a class="p-2 link-secondary" href="#">Style</a>
+      <a class="p-2 link-secondary" href="#">Travel</a>
+
+    </nav>
+  </div>
+</div>
+
+</header>
+<body>
+<!--Блок контента-->
+<div class="content-text">
+{% block content %}
+{% endblock %}
+</div>
+<!--Конец контента-->
+<!-- Footer -->
+
+<footer id="footer" class="footer-1">
+<div class="main-footer widgets-dark typo-light">
+<div class="container">
+<div class="row">
+
+<div class="col-xs-12 col-sm-6 col-md-3">
+<div class="widget subscribe no-box">
+<h5 class="widget-title">OLEX<span></span></h5>
+<p>About the company, little discription will goes here.. </p>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-3">
+<div class="widget no-box">
+<h5 class="widget-title">Quick Links<span></span></h5>
+<ul class="thumbnail-widget">
+<li>
+<div class="thumb-content"><a href="#.">Get Started</a></div>
+</li>
+<li>
+<div class="thumb-content"><a href="#.">Top Leaders</a></div>
+</li>
+<li>
+<div class="thumb-content"><a href="/about/">Success Story</a></div>
+</li>
+<li>
+<div class="thumb-content"><a href="#.">Event/Tickets</a></div>
+</li>
+<li>
+<div class="thumb-content"><a href="#.">News</a></div>
+</li>
+<li>
+<div class="thumb-content"><a href="#.">Lifestyle</a></div>
+</li>
+<li>
+<div class="thumb-content"><a href="/about/">About</a></div>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-3">
+<div class="widget no-box">
+<h5 class="widget-title">Get Started<span></span></h5>
+<p>Get access to your full Training and Marketing Suite.</p>
+<a class="btn" href="/register/" target="_blank">Register Now</a>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-3">
+
+<div class="widget no-box">
+<h5 class="widget-title">Contact Us<span></span></h5>
+<p><a href="mailto:olegtar25@gmail.com" title="glorythemes">olegtar25@gmail.com</a></p>
+<p><a href="/feedback/"><button type="button" class="btn btn-info" id="contact_us">Связаться с нами</button></a></p>
+
+<ul class="social-footer2">
+<li class=""><a title="Youtube" target="_blank" href="//youtube.com"><img alt="youtube" width="30" height="30" src="https://www.youtube.com/img/desktop/yt_1200.png"></a></li>
+<li class=""><a href="//facebook.com" target="_blank" title="Facebook"><img alt="Facebook" width="30" height="30" src="https://www.facebook.com/images/fb_icon_325x325.png"></a></li>
+<li class=""><a href="//twitter.com" target="_blank" title="Twitter"><img alt="Twitter" width="30" height="30" src="https://help.twitter.com/content/dam/help-twitter/brand/logo.png"></a></li>
+<li class=""><a title="instagram" target="_blank" href="//instagram.com"><img alt="instagram" width="30" height="30" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/800px-Instagram_logo_2022.svg.png"></a></li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-12 text-center">
+<p>Copyright OLEX Company © 2022. All rights reserved.</p>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<!-- Конец footer'а и страницы -->
+
+</body>
