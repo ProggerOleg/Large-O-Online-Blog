@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post
+from .models import *
 
 # Register your models here.
 
@@ -11,5 +11,15 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('time_create', 'author')
     prepopulated_fields = {'url': ('title',)}
 
+    def get_tags(self, instance):
+        return [tag.name for tag in instance.tags.all()]
+
+
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug')
+    search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
+
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Tag, TagAdmin)

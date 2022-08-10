@@ -147,3 +147,64 @@ h1, h2, h3, h4, h5, h6 {
 @media (min-width: 768px) {
   .h-md-250 { height: 250px; }
 }
+
+/* Search button */
+#search{
+    position:relative;
+    top:0px;
+    right:10px;
+    transition: all 1s;
+    width: 40px;
+    height: 40px;
+    background: white;
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 1px solid white;
+    padding: 5px;
+}
+
+#search input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;;
+    height: 42.5px;
+    line-height: 30px;
+    outline: 0;
+    border: 0;
+    display: none;
+    font-size: 1em;
+    border-radius: 20px;
+    padding: 0 20px;
+    border: 1px solid grey;
+}
+
+.fa{
+    box-sizing: border-box;
+    padding: 10px;
+    width: 42.5px;
+    height: 42.5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    color: #07051a;
+    text-align: center;
+    font-size: 1.2em;
+    transition: all 1s;
+}
+
+#search:hover{
+    width: 200px;
+    cursor: pointer;
+}
+
+#search:hover input{
+    display: block;
+}
+
+$search:hover .fa{
+    background: #07051a;
+    color: white;
+}
+/* End search button */

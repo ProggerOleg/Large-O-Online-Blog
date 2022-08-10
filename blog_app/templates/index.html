@@ -61,119 +61,63 @@
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <!--End of carusel-->
+
 <!--Cards-->
 <div class="container">
     <h1 class="my-3">Последние записи блога</h1>
     <div class="row">
+        {% for post in page_obj %}
         <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/second_image.jpg' %}" alt="" class="card-img-top">
+                <img src="{{ post.image.url }}" alt="" class="card-img-top">
                 <div class="card-body">
-                    <h4 class="card-title">Заголовок</h4>
-                    <p class="card-text">Это красткое описание поста. Это красткое описание поста. Это красткое описание поста. </p>
+                    <h4 class="card-title">{{ post.title|safe|truncatechars:50 }}</h4>
+                    {% for tag in post.tag.all %}
+                        <a href="" class="mr-1 badge badge-info">#{{ tag }}</a>
+                    {% endfor %}
+                    <p class="card-text">{{ post.description|safe|truncatechars:30 }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a href="#" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                            <a href="{% url 'post_detail' slug=post.url %}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
                         </div>
-                        <small class="text-muted">22.10.2020</small>
+                        <small class="text-muted">{{post.time_create}}</small>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/first_image.jpg' %}" alt="" class="card-img-top">
-                <div class="card-body">
-                    <h4 class="card-title">Заголовок</h4>
-                    <p class="card-text">Это красткое описание поста. Это красткое описание поста. Это красткое описание поста. </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-sm btn-outline-secondary">Подробнее</a>
-                        </div>
-                        <small class="text-muted">21.10.2020</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/third_image.jpg' %}" alt="" class="card-img-top">
-                <div class="card-body">
-                    <h4 class="card-title">Заголовок</h4>
-                    <p class="card-text">Это красткое описание поста. Это красткое описание поста. Это красткое описание поста. </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-sm btn-outline-secondary">Подробнее</a>
-                        </div>
-                        <small class="text-muted">20.10.2020</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/first_image.jpg' %}" alt="" class="card-img-top">
-                <div class="card-body">
-                    <h4 class="card-title">Заголовок</h4>
-                    <p class="card-text">Это красткое описание поста. Это красткое описание поста. Это красткое описание поста. </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-sm btn-outline-secondary">Подробнее</a>
-                        </div>
-                        <small class="text-muted">19.10.2020</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/third_image.jpg' %}" alt="" class="card-img-top">
-                <div class="card-body">
-                    <h4 class="card-title">Заголовок</h4>
-                    <p class="card-text">Это красткое описание поста. Это красткое описание поста. Это красткое описание поста. </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-sm btn-outline-secondary">Подробнее</a>
-                        </div>
-                        <small class="text-muted">18.10.2020</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{% static 'images/first_image.jpg' %}" alt="" class="card-img-top">
-                <div class="card-body">
-                    <h4 class="card-title">Заголовок</h4>
-                    <p class="card-text">Это красткое описание поста. Это красткое описание поста. Это красткое описание поста. </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-sm btn-outline-secondary">Подробнее</a>
-                        </div>
-                        <small class="text-muted">17.10.2020</small>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 <!--End of cards-->
 <!--Pagination-->
-<nav aria-label="Paginate me">
-    <ul class="pagination justify-content-center">
+{% block pagination %}
+    <nav aria-label="Paginate me">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Предыдущая</a>
+        {% else %}
         <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Предыдущая</a>
+          <a class="page-link disabled" href="#" tabindex="-1">Предыдущая</a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+        {% if i == page_obj.number %}
+          <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+        {% else %}
+          <li class="page-item disabled">
             <a class="page-link" href="#">Следующая</a>
-        </li>
-    </ul>
-</nav>
-<br>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <br>
+{% endblock %}
 <!--End pagination-->
 
   {% endblock %}
