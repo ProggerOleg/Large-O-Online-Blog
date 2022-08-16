@@ -42,17 +42,9 @@
 
   <div class="nav-scroller py-1 mb-2" style="text-color:red;">
     <nav class="nav d-flex justify-content-between">
-      {% for tag in tags %}
-      <a class="p-2 link-secondary" href="#">{{tag.name}}</a>
+      {% for tag in tags%}
+      <a class="p-2 link-secondary" href="{% url 'tag' tag.slug %}">{{tag}}</a>
       {% endfor %}
-      <a class="p-2 link-secondary" href="#">World</a>
-      <a class="p-2 link-secondary" href="#">U.S.</a>
-      <a class="p-2 link-secondary" href="#">Technology</a>
-      <a class="p-2 link-secondary" href="#">Design</a>
-      <a class="p-2 link-secondary" href="#">Culture</a>
-      <a class="p-2 link-secondary" href="#">Business</a>
-      <a class="p-2 link-secondary" href="#">Opinion</a>
-      <a class="p-2 link-secondary" href="#">Science</a>
     </nav>
   </div>
 </div>

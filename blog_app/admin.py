@@ -14,12 +14,12 @@ class PostAdmin(admin.ModelAdmin):
     def get_tags(self, instance):
         return [tag.name for tag in instance.tags.all()]
 
-
-class TagAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug')
-    search_fields = ('name',)
-    prepopulated_fields = {'slug': ('name',)}
+#
+# class TagAdmin(admin.ModelAdmin):
+#     list_display = ('name', 'slug')
+#     search_fields = ('name',)
+#     prepopulated_fields = {'slug': ('name',)}
 
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(Tag, TagAdmin)
+# admin.site.register(Tag, TagAdmin)

@@ -11,4 +11,5 @@ urlpatterns = [
     path('blog/<slug>/', PostDetailView.as_view(), name='post_detail'),
     path('search/', SearchPost.as_view(), name='search_results'),
     path('feedback/', ContactFormView.as_view(), name='contact_us'),
+    path('tag/<slug:slug>/', TagView.as_view(), name="tag"),
 ]
