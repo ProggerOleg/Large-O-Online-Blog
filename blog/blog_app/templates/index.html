@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Главная страница!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+          crossorigin="anonymous">
+      <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+      <link rel="icon" href="data:;base64,=">
+  </head>
+  <body>
+    {% block content %}
+<!--Carusel-->
+    <div class="container-fluid home-slider" id="carusel">
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'images/second_image.jpg' %}" class="d-block w-100" alt="Первая картинка">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Это описание первого слайда</h5>
+                    <p>Тут можно писать все что угодно</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/first_image.jpg' %}" class="d-block w-100" alt="Вторая картинка">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Это описание второго слайда</h5>
+                    <p>Тут можно писать все что угодно</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/third_image.jpg' %}" class="d-block w-100" alt="Третья картинка">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Это описание третьего слайда</h5>
+                    <p>Тут можно писать все что угодно</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<!--End of carusel-->
+
+<!--Cards-->
+<div class="container">
+    <h1 class="my-3">Последние записи блога</h1>
+    <div class="row">
+        {% for post in page_obj %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="{{ post.image.url }}" alt="" class="card-img-top">
+                <div class="card-body">
+                    <h4 class="card-title">{{ post.title|safe|truncatechars:50 }}</h4>
+                    {% for tag in post.tag.all %}
+                        <a href="" class="mr-1 badge badge-info">#{{ tag }}</a>
+                    {% endfor %}
+                    <p class="card-text">{{ post.description|safe|truncatechars:30 }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="{% url 'post_detail' slug=post.url %}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                        </div>
+                        <small class="text-muted">{{post.time_create}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!--End of cards-->
+<!--Pagination-->
+{% block pagination %}
+    <nav aria-label="Paginate me">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Предыдущая</a>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link disabled" href="#" tabindex="-1">Предыдущая</a>
+        </li>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+        {% if i == page_obj.number %}
+          <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#">Следующая</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <br>
+{% endblock %}
+<!--End pagination-->
+
+  {% endblock %}
+  </body>
+</html>
