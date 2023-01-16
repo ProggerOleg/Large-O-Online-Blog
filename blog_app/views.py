@@ -18,7 +18,7 @@ tags = Tag.objects.all()
 
 
 def index(request):
-    paginator = Paginator(posts, 3)
+    paginator = Paginator(posts, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'index.html', {'title': 'Добро пожаловать в мой блог', 'posts': posts,

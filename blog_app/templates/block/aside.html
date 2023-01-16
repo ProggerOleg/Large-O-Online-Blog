@@ -15,7 +15,7 @@
         {% for lp in last_posts %}
             <div class="card-body">
                 <h5 class="card-title">{{ lp.h1 }}</h5>
-                <img src="{{ lp.image.url }}" alt="" class="card-img-top"><br><br>
+                <img src="{{ lp.image }}" alt="" class="card-img-top"><br><br>
                 {{ lp.description|safe|truncatechars:100 }}
                 <a href="{% url 'post_detail' lp.url%}" class="card-link" style="color:#0000EE;">Подробнее</a>
                 <hr>
