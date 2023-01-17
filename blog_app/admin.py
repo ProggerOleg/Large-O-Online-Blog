@@ -14,6 +14,10 @@ class PostAdmin(admin.ModelAdmin):
     def get_tags(self, instance):
         return [tag.name for tag in instance.tags.all()]
 
+
+class ComentsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text', 'created_date', 'post_id', 'username_id')
+    list_filter = ('created_date', 'post_id')
 #
 # class TagAdmin(admin.ModelAdmin):
 #     list_display = ('name', 'slug')
@@ -22,4 +26,5 @@ class PostAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Comment, ComentsAdmin)
 # admin.site.register(Tag, TagAdmin)

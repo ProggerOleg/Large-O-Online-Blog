@@ -12,4 +12,6 @@ urlpatterns = [
     path('search/', SearchPost.as_view(), name='search_results'),
     path('feedback/', ContactFormView.as_view(), name='contact_us'),
     path('tag/<slug:slug>/', TagView.as_view(), name="tag"),
+    path('user_profile/<int:pk>/', ShowProfilePageView.as_view(), name='user_profile'),
+    path('create_profile_page/', CreateProfilePageView.as_view(), name='create_user_profile'),
 ]

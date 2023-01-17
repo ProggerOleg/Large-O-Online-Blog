@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.core.paginator import Paginator
-from django.views.generic import CreateView, ListView, FormView
+from django.views.generic import CreateView, ListView, FormView, DetailView
 from taggit.models import Tag
 
 from .forms import *
@@ -16,11 +16,24 @@ from .models import *
 posts = Post.objects.all()
 tags = Tag.objects.all()
 
+class IndexView(View):
+    model = Profile
+    template_name = 'index.html'
+  
+    def get_context_data(self, *args, **kwargs):
+        users = Profile.objects.all()
+        context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
+        page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
+        context['page_user'] = page_user
+        return context
+
 
 def index(request):
     paginator = Paginator(posts, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+
+    
     return render(request, 'index.html', {'title': 'Добро пожаловать в мой блог', 'posts': posts,
                                           'page_obj': page_obj, 'tags': tags})
 
@@ -130,3 +143,25 @@ class ContactFormView(FormView):
 
     def get_context_data(self, **kwargs):
         return {'title': 'Связаться с нами', 'form': self.form_class, 'tags': Tag.objects.all()}
+
+class ShowProfilePageView(DetailView):
+    model = Profile
+    template_name = 'user_profile.html'
+  
+    def get_context_data(self, *args, **kwargs):
+        users = Profile.objects.all()
+        context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
+        page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
+        context['page_user'] = page_user
+        return context
+
+class CreateProfilePageView(CreateView):
+    model = Profile
+    
+    template_name = 'create_profile.html'
+    fields = ['profile_pic', 'bio', 'facebook', 'twitter', 'instagram']
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    success_url = reverse_lazy('')

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='profile__block'>
+    <div class="header-bar">
+        <a href="#" style='margin: 40px 20px'>&#8592; Назад</a>
+        <h1 style="text-align:center;">Profile</h1>
+    </div>
+    
+    <div class="card-body">
+        <div class='profile__picture'>
+    {% if user.profile.profile_pic %}
+      <img src="{{ profile.profile_pic.url }}" height=400 width=400><br><br>
+    {% else %}
+      <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg" height=400 width=400>
+    {% endif %}
+        </div>
+    <div>
+        
+    </div>
+      <p><strong>Username:</strong> {{ page_user }}</p>
+      <p><strong>Bio:</strong> {{ profile.bio }}</p>
+      {% if profile.twitter %}
+      <p><strong>Twitter:</strong> {{ profile.twitter }}</p>
+      {% endif %}
+      {% if profile.instagram %}
+      <p><strong>Instagram:</strong> {{ profile.instagram }}</p>
+      {% endif %}
+      {% if profile.facebook %}
+      <p><strong>Facebook:</strong> {{ profile.facebook }}</p>
+      {% endif %}
+
+      {% if user.id == profile.user.id %}
+      {% comment %} <a href="{% url 'edit_user_profile' profile.id %}"><button class="button">Edit</button></a> {% endcomment %}
+      {% endif %}
+
+    </div>
+</div>
+{% endblock content %}
