@@ -82,3 +82,16 @@ class CommentForm(forms.ModelForm):
                 'rows': 3
             }),
         }
+
+
+class CreateProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ['profile_pic', 'bio', 'facebook', 'twitter', 'instagram']
+        widgets = {
+            'text': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3
+            }),
+        }

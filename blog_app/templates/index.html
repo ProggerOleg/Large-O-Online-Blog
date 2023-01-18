@@ -15,7 +15,7 @@
   <body>
     {% block content %}
 <!--Carusel-->
-<div class="carousel__block" style='width: 75%; margin: 20px auto;'>
+<div class="carousel__block" style='width: 75%; margin: 40px auto;'>
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -62,9 +62,14 @@
               {% endfor %}
               <br>
               <div class="d-flex justify-content-between align-items-start">
-                <div class="btn-group">
-                  <a href="{% url 'post_detail' post.url %}" class="btn btn-sm btn-outline-secondary">Читати далі...</a>
-                </div>
+                <a href="{% url 'post_detail' post.url %}">
+                  <button class="learn-more">
+                    <span class="circle" aria-hidden="true">
+                    <span class="icon arrow"></span>
+                    </span>
+                    <span class="button-text">Learn More</span>
+                  </button>
+                </a>
                 <p class="text-muted">{{ post.time_create }}</p>
               </div>
             </div>

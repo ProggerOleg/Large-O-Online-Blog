@@ -4,16 +4,38 @@
         <div class="header-bar">
             <a href="#">&#8592; Back</a>
         </div>
-    &lt;
-    <div class="card-body">
-        <form method="POST" action="" enctype="multipart/form-data">;
+
+    <div class="card-body" style="width: 1000px; margin: 0 auto;">
+        <form method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
-            {{form.as_p}}
-            <input class="button" type="submit" value="Submit">;
+            <div class="left__profile">
+                {{form.profile_pic}}
+                {% if img_obj %}
+                <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+                {% endif %}
+            </div>
+
+            <div class="textInputWrapper">
+                <input placeholder={{form.bio.name}} type="text" class="textInput">
+            </div>
+
+            <div class="textInputWrapper">
+                <input placeholder={{form.facebook.name}} type="text" class="textInput">
+            </div>
+
+            <div class="textInputWrapper">
+                <input placeholder={{form.twitter.name}} type="text" class="textInput">
+            </div>
+
+            <div class="textInputWrapper">
+                <input placeholder={{form.instagram.name}} type="text" class="textInput">
+            </div>
+            
+            <input class="button" type="submit" value="Submit">
         </form>
     </div>
 {% else %}
-    <a href="{% url 'login' %}">Login</a>
+<meta http-equiv="REFRESH" content="0;url={% url 'login' %}">
 {% endif %}
 
 {% endblock content %}

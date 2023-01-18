@@ -16,22 +16,22 @@
 <!--Шапка сайта-->
   <header style="color:grey;">
     <div class="container">
-  <header class="blog-header lh-1 py-3">
+  <div class="blog-header lh-1 py-3">
     <div class="row flex-nowrap justify-content-between align-items-center">
-      <div class="col-4 pt-1 d-flex justify-content-between align-items-center">
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider"></span>
-      </label>
-      {% if user.profile.profile_pic %}
+      <div class="col-4 pt-1 d-flex  align-items-center">
+        {% if user.profile.profile_pic %}
         <a href={% url 'user_profile' user.profile.id%}>
-           <img src="{{ user.profile.profile_pic.url }}" height=50 width=50 style='border-radius:25px;'><br><br>
+           <img src="{{ user.profile.profile_pic.url }}" height=50 width=50 style='border-radius:25px;'><br>
         </a>
       {% else %}
         <a href={% url 'create_user_profile' %}>
           <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg" height=50 width=50 style='border-radius:25px;'>
         </a><br><br>
       {% endif %}
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider"></span>
+      </label>
       </div>
       <div class="col-4 text-center">
         <h1><a class="blog-header-logo text-dark" href="/" style="font-weight: bold;font-size: 42px;">Large O</a></h1>
@@ -49,7 +49,7 @@
         {% endif %}
       </div>
     </div>
-  </header>
+  </div>
 <!--Конец шапки-->
 
   <div class="nav-scroller py-1 mb-2" style="text-color:red;">
@@ -65,8 +65,8 @@
 <body>
 <!--Блок контента-->
 <div class="content-text">
-{% block content %}
-{% endblock %}
+  {% block content %}
+  {% endblock %}
 </div>
 <!--Конец контента-->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

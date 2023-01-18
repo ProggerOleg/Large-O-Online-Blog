@@ -6,6 +6,7 @@ from django.views import View
 from django.core.paginator import Paginator
 from django.views.generic import CreateView, ListView, FormView, DetailView
 from taggit.models import Tag
+from django.shortcuts import redirect
 
 from .forms import *
 from django.http import HttpResponseRedirect, HttpResponse
@@ -15,17 +16,6 @@ from .models import *
 
 posts = Post.objects.all()
 tags = Tag.objects.all()
-
-class IndexView(View):
-    model = Profile
-    template_name = 'index.html'
-  
-    def get_context_data(self, *args, **kwargs):
-        users = Profile.objects.all()
-        context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
-        page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
-        context['page_user'] = page_user
-        return context
 
 
 def index(request):
@@ -160,8 +150,18 @@ class CreateProfilePageView(CreateView):
     
     template_name = 'create_profile.html'
     fields = ['profile_pic', 'bio', 'facebook', 'twitter', 'instagram']
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+    def get(self, request):
+        form = CreateProfileForm()
+        img_obj = form.instance
+        return render(request, 'create_profile.html', context={
+            'title': "Створити профіль",
+            'form': form,
+            'img_obj': img_obj
+        })
 
     success_url = reverse_lazy('')
