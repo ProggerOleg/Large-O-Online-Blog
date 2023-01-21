@@ -50,18 +50,8 @@
       </div>
     </div>
   </div>
+  </header>
 <!--Конец шапки-->
-
-  <div class="nav-scroller py-1 mb-2" style="text-color:red;">
-    <nav class="nav d-flex justify-content-between">
-      {% for tag in tags%}
-      <a class="p-2 link-secondary" href="{% url 'tag' tag.slug %}">{{tag}}</a>
-      {% endfor %}
-    </nav>
-  </div>
-</div>
-
-</header>
 <body>
 <!--Блок контента-->
 <div class="content-text">

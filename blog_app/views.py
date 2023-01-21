@@ -143,7 +143,9 @@ class ShowProfilePageView(DetailView):
         context = super(ShowProfilePageView, self).get_context_data(*args, **kwargs)
         page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
         context['page_user'] = page_user
+        context['title'] = 'Особистий профіль'
         return context
+    
 
 class CreateProfilePageView(CreateView):
     model = Profile
@@ -157,12 +159,6 @@ class CreateProfilePageView(CreateView):
 
     def get(self, request):
         form = CreateProfileForm()
-        if request.FILES:
-            return render(request, 'create_profile.html', context={
-            'title': "Створити профіль",
-            'form': form,
-            'img_obj': 'true'
-        })
         return render(request, 'create_profile.html', context={
             'title': "Створити профіль",
             'form': form,

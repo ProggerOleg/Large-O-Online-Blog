@@ -4,6 +4,9 @@ A {
 .link-secondary {
    text-decoration: underline; /* Подчеркивание заголовка */
    }
+.mr-1 {
+  margin-bottom: 10px;
+}
 
 .profile__create {
   display: flex;
@@ -197,14 +200,28 @@ button {
 
 .profile__block {
   max-width: 800px;
-  margin: 0 auto;
-  border: grey solid 3px;
+  margin: 60px auto;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 30px;
   min-height: 450px;
 }
-
-.card-body image {
-  float: right;
+.profile__body {
+  display: flex;
+  justify-content: space-evenly;
+}
+.profile__body image {
+  float: left;
+}
+.profile__text {
+  width: 300px;
+}
+.profile__text p {
+  font-size: 20px;
+}
+.social__medias { 
+  display: flex;
+  width: 250px;
+  justify-content: space-between;
 }
 
 
