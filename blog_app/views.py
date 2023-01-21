@@ -157,11 +157,16 @@ class CreateProfilePageView(CreateView):
 
     def get(self, request):
         form = CreateProfileForm()
-        img_obj = form.instance
+        if request.FILES:
+            return render(request, 'create_profile.html', context={
+            'title': "Створити профіль",
+            'form': form,
+            'img_obj': 'true'
+        })
         return render(request, 'create_profile.html', context={
             'title': "Створити профіль",
             'form': form,
-            'img_obj': img_obj
         })
+
 
     success_url = reverse_lazy('')
