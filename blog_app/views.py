@@ -60,7 +60,7 @@ class TagView(View):
         posts = Post.objects.filter(tag=tag)
         common_tags = Post.tag.most_common()
         return render(request, 'tag.html', context={
-            'title': f'#ТЕГ {tag}',
+            'title': f'По тегу: {tag}',
             'posts': posts,
             'tag': tag,
             'common_tags': common_tags

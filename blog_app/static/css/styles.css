@@ -89,6 +89,9 @@ A {
 .home-slider p{
     font-size: 30px;
 }
+.carousel-inner {
+  height: 600px;
+}
 .carousel-caption {
     bottom: 100px;
 }
